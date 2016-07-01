@@ -21,7 +21,7 @@ public class DriverTest {
             driverExam.setQuestion(i,input.getInput());
         }
 
-        Integer[] missed = driverExam.totalMissed(); // Used a couple of times, so local variable
+        Integer[] missed = driverExam.questionMissed(); // Used a couple of times, so local variable
         System.out.println("The student has "+(driverExam.passed()?"passed":"failed")+" with a score of "+driverExam.totalCorrect()+"/"+driverExam.getQuestionNum()+" and a total of "+missed.length+" missed answers!");
         System.out.println("The missed answers were: ");
         //print out missed question indexes

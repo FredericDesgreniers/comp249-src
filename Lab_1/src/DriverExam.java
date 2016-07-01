@@ -90,7 +90,7 @@ public class DriverExam {
      * Get total number of missed answers
      * @return
      */
-    public Integer[] totalMissed(){
+    public Integer[] questionMissed(){
         update();
         return missedCache;
     }
