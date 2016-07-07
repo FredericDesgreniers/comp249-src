@@ -1,0 +1,1 @@
+Note: the lab word document seems to be missing exactly which new variables to add, so I'm assuming it's domainName
