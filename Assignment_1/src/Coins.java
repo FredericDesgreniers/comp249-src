@@ -189,8 +189,8 @@ public class Coins {
      * @return
      */
     public String toString(){
-        String s = "| %d x 5¢ | %d x 10¢ | %d x 25¢ | %d x 1$ | %d x 2$ |";
-        return String.format(s,nickles, dimes, quarters, loonies, toonies);
+        String s = "| %d x 5¢ | %d x 10¢ | %d x 25¢ | %d x 1$ | %d x 2$ | --> $%.2f";
+        return String.format(s,nickles, dimes, quarters, loonies, toonies,coinsTotal());
     }
 
 

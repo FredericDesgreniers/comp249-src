@@ -21,12 +21,15 @@ public class Wallet {
      */
     public Wallet(Coins coins, CreditCard[] creditCards){
 
-        this.coins = new Coins(coins);
+        this.coins = new Coins(coins); //copy coins for privacy leak protection
+        if(creditCards == null){
+            this.creditCards = null;
+        }else {
+            this.creditCards = new CreditCard[creditCards.length];
 
-        this.creditCards = new CreditCard[creditCards.length];
-
-        for(int i = 0; i < creditCards.length; i++){                //For the sake of privacy leak. Makes it impossible for anything outside of this class to have access to the credit card objects
-            this.creditCards[i] = new CreditCard(creditCards[i]);
+            for (int i = 0; i < creditCards.length; i++) {//For the sake of privacy leak. Makes it impossible for anything outside of this class to have access to the credit card objects
+                this.creditCards[i] = new CreditCard(creditCards[i]);
+            }
         }
     }
 
@@ -61,7 +64,7 @@ public class Wallet {
      * @return number of credit cards
      */
     public int creditCardNum(){
-        if(creditCards == null)
+        if(creditCards == null) //check if their are any credit cards in wallet
             return 0;
         else
             return creditCards.length;
@@ -104,6 +107,7 @@ public class Wallet {
             for(int i = index+1; i < creditCards.length; i++){ //Add cards after the removed one
                 newCreditCards[i-1] = creditCards[i];
             }
+            creditCards = newCreditCards;
         }else{
             return false; //no cards to remove
         }
@@ -118,7 +122,7 @@ public class Wallet {
      */
     public void updateExipiryDate(int cardIndex, int  month, int year){
         if(creditCards != null)
-        if(cardIndex > 0 && cardIndex < creditCards.length){
+        if(cardIndex > 0 && cardIndex < creditCards.length){ //make sure card is valid
             CreditCard creditCard = creditCards[cardIndex];
             creditCard.setExpiryMonth(month);
             creditCard.setExpiryYear(year);
@@ -153,11 +157,13 @@ public class Wallet {
      * @return formatted String
      */
     public String toString(){
-        String s = "%s\n%s";
-        String coinsStr = String.format("Coins: \n\t%s", coins);
-        String creditCardsStr = "Credit Cards:\n";
+        String s = "%s\n%s"; //base unformatted string
+
+        String coinsStr = String.format("Coins: \n\t%s", coins); //coin string
+
+        String creditCardsStr = " Credit Cards:\n"; ///credit card string
         if(creditCardNum() == 0){
-            creditCardsStr += "No cards available";
+            creditCardsStr += "No cards available\n";
         }else{
             for(int i = 0; i < creditCards.length; i++){
                 CreditCard creditCard = creditCards[i];
