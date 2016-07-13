@@ -11,6 +11,9 @@
 public class Customer extends Person{
     private boolean onMailingList = false;
 
+    /**
+     * Default customer
+     */
     public Customer(){
         super();
     }
